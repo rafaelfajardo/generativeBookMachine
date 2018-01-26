@@ -1,0 +1,8 @@
+set into type
+by YourName Here
+using Processing 3
+with the font you chose
+as a generative book
+this is a poemmachine
+for emergent digital practices
+in an unlimited edition
