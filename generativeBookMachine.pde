@@ -7,7 +7,7 @@
  *  capable of creating a colophon from data/colophon.txt
  *  using the Work Sans typeface family
  *  
- *  It depends on Processing.PDF to creat multipage output
+ *  It depends on Processing.PDF to create multipage output
  *
  *  It wants to create a code drawing on every page, that function is still in broken
  *  using curves and vertices instead of turtles

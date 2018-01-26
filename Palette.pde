@@ -1,7 +1,7 @@
 class Palette {
-  String inColor;
-  int numColors = 24;
-  color [] col = new color [numColors];
+  String inColor; 
+  int numColors = 24; // integer number of colors in this palette
+  color [] col = new color [numColors]; // array to hold the colors in the palette
 
 /*
  *
@@ -9,6 +9,12 @@ class Palette {
  *  I would like to make set of constructors that could be addressed by a string (I think)
  *
  *  I have built a number of the palettes using Adobe's Kuler online color tool
+ *  the different palettes here are commented out so that only one is active at any time
+ *  use the multi-line comment symbols to deactivate the current palette and 
+ *  remove the multi-line comment symbols to activate another palette
+ *  only one palette can be active at a time or an error will occur
+ *
+ *  there is a getColor() call at the bottom that returns a random color from the palette array
  *
  */
 
