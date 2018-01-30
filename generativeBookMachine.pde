@@ -77,6 +77,7 @@ void draw(){
       strokeWeight( int (random(1,2))); // set thickness of the line
       stroke(spectrum.GetColor()); // grab a random color from the palette
       rect(width/8,height/8,width*6/8,height*6/8); // make a rectangle of color
+
       //Spline catmull = new Spline (random (width/8, width*6/8), i ); // this needs fixing
       
       //the following line may not be working
@@ -102,6 +103,8 @@ void draw(){
     }
     
     */
+    
+    //==============================
     //This part prepares to render text on top of the code drawing
     fill(255); // fill this font with white so that it's visible on top of the code drawing
     textFont(f[8]); // choose the font from the array, array index should be 0-9 if you haven't changed the font array above
@@ -130,7 +133,7 @@ void draw(){
     exit(); // end execution of the sketch because we have finished rendering the colophon which is the last page of the book. this may also be necessary to close the PDF file
   }
 }
-
+//==============================
 // create a function called f that should render a snowflake with a turtle
 void f (float length, int depth ){  // found on http://www.algorithm.co.il/blogs/computer-science/fractals-in-10-minutes-no-6-turtle-snowflake/
         //def f(length, depth):
