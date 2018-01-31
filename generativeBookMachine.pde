@@ -54,13 +54,13 @@ void setup(){
    background (255); // choose to work with a white background
 
   // create a set of turtlesBox
-  for (int i = 0; i < turtlesBox.length; i++){
-    float newX = random(width/8+10, width*7/8-10 );
-    float newY = random(height/8+10, height+7/8-10 );
+  for (int i = 0; i < turtlesBox.length; i++){ //loop to cycle through and initialize/construct the turtles
+    float newX = random(width/8+10, width*7/8-10 ); // locate the first x value within the margins
+    float newY = random(height/8+10, height+7/8-10 ); // locat the first y value within the margins
     int   newW = 1;
     color newC = paletteBox.GetColor(); // get a color from the Palette
-    //color newC = color(random(255),random(255)); // random grey and alpha
-    float newA = random (0,45);
+    //color newC = color(random(255),random(255)); // random grey and alpha // if one wants a random color
+    float newA = random (0,45); // create an angle between 0 and 45°
     turtlesBox [i] = new Turtle ( newX,
                                newY,
                                newW,
@@ -97,10 +97,8 @@ void draw(){
       //strokeWeight( int (random(10,20))); // set thickness of the line
       //stroke(spectrum.GetColor()); // grab a random color from the palette
       //rect(width/8,height/8,width*6/8,height*6/8); // make a rectangle of color
-
       //catmull = new Spline (random (width/8, width*6/8), i ); // this needs fixing
  
-      
       //the following line may not be working
       //f(500, 4); // call the function that draws a snowflake with a turtle recursively, defined below. The name "f" may be confusing
       
@@ -127,13 +125,13 @@ void draw(){
     
   //cycle through all the turtlesBox
   for (int i = 0; i < turtlesBox.length; i++){    
-    //if x and y  of a turtle are within the canvas
+    //if x and y  of a turtle are within the canvas, or with the margins
     if ((turtlesBox [i].GetX() < width*7/8 + 2)
       &&(turtlesBox [i].GetX() > width/8 - 2 )
       &&(turtlesBox [i].GetY() < height*7/8 + 2)
       &&(turtlesBox [i].GetY() > height/8 - 2 )){
         //each turtle will make a circle, in turn
-        for (int j = 0; j < 360; j++){
+        for (int j = 0; j < 360; j++){  // loop to get the turtles to walk in a circle
           turtlesBox [i].Move ( .1f ); // move forward a bit
           turtlesBox [i].Turn ( 1 ); // turn a bit
         }
@@ -157,7 +155,7 @@ void draw(){
     
     //==============================
     //This part prepares to render text on top of the code drawing
-    fill(255); // fill this font with white so that it's visible on top of the code drawing
+    fill(128); // fill this font with grey so that it's visible on top of the code drawing
     textFont(f[8]); // choose the font from the array, array index should be 0-9 if you haven't changed the font array above
     textSize(height/10); // the size of the font will be 1/10th the height of the page
     text(bodyMatter[int(random(bodyMatter.length))],width/2,height/2); // render a random line from the body text array to the center of the page  
