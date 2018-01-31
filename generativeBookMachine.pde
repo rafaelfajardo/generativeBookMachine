@@ -24,7 +24,10 @@ String[] colophonMatter; // an array to hold colophon words, credits and printin
 String myColor; // a string placeholder for a color value
 PFont [] f = new PFont [10]; // an array to hold 10 fonts
 String fileTitle = "testbook_"+year()+"-"+nf(month(),2)+"-"+nf(day(),2)+"-"+nf(hour(),2)+"-"+nf(minute(),2)+"-"+nf(second(),2)+".pdf"; //generates a file named "test book" with today's date in YYYY MM DD HH MM SS format in the filename
-Palette spectrum = new Palette(); // need to create a Palette object in order to use the member methods
+//Palette spectrum = new Palette(); // need to create a Palette object in order to use the member methods
+//Spline catmull; // invoke a spline called catmull
+Palette paletteBox = new Palette(); //palette for Box
+Turtle [] turtlesBox = new Turtle [128]; //number of turtles of type Box
 
 void setup(){
    size (396, 612, PDF, fileTitle); // create an arbitrary sized square composition, use PDF renderer and save to a file titled book+datestamp+timestamp
@@ -49,6 +52,23 @@ void setup(){
    f[9] = createFont("WorkSans-Black.ttf", height/10, true); // load a font into a place in the font array f[]
    textAlign(CENTER); // choose to center the line of text
    background (255); // choose to work with a white background
+
+  // create a set of turtlesBox
+  for (int i = 0; i < turtlesBox.length; i++){
+    float newX = random(width/8+10, width*7/8-10 );
+    float newY = random(height/8+10, height+7/8-10 );
+    int   newW = 1;
+    color newC = paletteBox.GetColor(); // get a color from the Palette
+    //color newC = color(random(255),random(255)); // random grey and alpha
+    float newA = random (0,45);
+    turtlesBox [i] = new Turtle ( newX,
+                               newY,
+                               newW,
+                               newC,
+                               newA,
+                               true);
+  }
+   
    
    println("setup complete"); // give feedback through the console that setup has completed
 }
@@ -72,13 +92,14 @@ void draw(){
     println("body page no. " + frameCount); //provide feedback through the console that page number XX is about to be rendered
     // this section makes a code drawing on the page:
     // make a bunch of horizontal lines with the vertices rather than rendered pixels
-    for ( int i = height/8; i < height*7/8; i++){ // choosing to divide the composition into 8 vertical units and leave a border above and below that are 1/8
-      fill( spectrum.GetColor()); // "fill" is for shapes, not strokes
-      strokeWeight( int (random(1,2))); // set thickness of the line
-      stroke(spectrum.GetColor()); // grab a random color from the palette
-      rect(width/8,height/8,width*6/8,height*6/8); // make a rectangle of color
+    //for ( int i = height/8; i < height*7/8; i++){ // choosing to divide the composition into 8 vertical units and leave a border above and below that are 1/8
+      //fill( spectrum.GetColor()); // "fill" is for shapes, not strokes
+      //strokeWeight( int (random(10,20))); // set thickness of the line
+      //stroke(spectrum.GetColor()); // grab a random color from the palette
+      //rect(width/8,height/8,width*6/8,height*6/8); // make a rectangle of color
 
-      //Spline catmull = new Spline (random (width/8, width*6/8), i ); // this needs fixing
+      //catmull = new Spline (random (width/8, width*6/8), i ); // this needs fixing
+ 
       
       //the following line may not be working
       //f(500, 4); // call the function that draws a snowflake with a turtle recursively, defined below. The name "f" may be confusing
@@ -89,7 +110,7 @@ void draw(){
         vertex (random(width*7/8-20, width*7/8),i); // second vertex is on right side of page, within a margin
        endShape(); // end of shape
        */
-    }
+    //}
     
     /* //I've commented out this part because it wasn't ready for prime-time
     // make a few vertical lines with vertices
@@ -103,6 +124,36 @@ void draw(){
     }
     
     */
+    
+  //cycle through all the turtlesBox
+  for (int i = 0; i < turtlesBox.length; i++){    
+    //if x and y  of a turtle are within the canvas
+    if ((turtlesBox [i].GetX() < width*7/8 + 2)
+      &&(turtlesBox [i].GetX() > width/8 - 2 )
+      &&(turtlesBox [i].GetY() < height*7/8 + 2)
+      &&(turtlesBox [i].GetY() > height/8 - 2 )){
+        //each turtle will make a circle, in turn
+        for (int j = 0; j < 360; j++){
+          turtlesBox [i].Move ( .1f ); // move forward a bit
+          turtlesBox [i].Turn ( 1 ); // turn a bit
+        }
+    }
+    // if a turtle finds itself outside the canvas, then bring them back in
+    else {
+      turtlesBox [i].PenUp();
+      turtlesBox [i].MoveTo (  random(width/8+10, width*7/8-10),
+                               random(height/8+10, height*7/8-10)  );
+      turtlesBox [i].PenDown();
+    }
+    // move each turtle to a new place
+      turtlesBox [i].PenUp();
+      turtlesBox [i].MoveTo (  random(width/8+10, width*7/8-10),
+                               random(height/8+10, height*7/8-10)  );
+      turtlesBox [i].PenDown();
+  }
+     
+    
+    
     
     //==============================
     //This part prepares to render text on top of the code drawing
