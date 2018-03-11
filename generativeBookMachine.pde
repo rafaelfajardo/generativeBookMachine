@@ -136,16 +136,21 @@ void draw(){
     textFont(f[8]); // choose the font from the array, array index should be 0-9 if you haven't changed the font array above
     textSize(height/10); // the size of the font will be 1/10th the height of the page
     text(bodyMatter[int(random(bodyMatter.length))],width/2,height/2); // render a random line from the body text array to the center of the page  
+    
+    //create a page number at the bottom of the page in the margin
     fill(0); // fill the next bit of text with black, it will be in the margin so it will be against a white background
     textFont(f[1]); // choose a font from the array, array index should be 0-9 if you haven't changed the font array above
     textSize(height/50); // choose size for this bit of text to be 1/50th of the height of the page, this will be small, that's okay
     text(frameCount, width/2, height*9/10); // render this bit of text to the lower margin, it is the page number, hence frameCount
+    
     pdf.nextPage(); // when we've completed rendering this page of the body then start making the next page of the PDF
-  }
+  } // finish rendering a page of body text
   
+  //================================
+  // This section renders the colophon from colophonMatter.txt on the last page of the book
   if (frameCount == pageCount) { // if the frame count in the draw loop has reached the page count we defined in setup then render the colophon
     println("colophon page no. " + frameCount); //feedback sent to the console
-    fill(0);
+    fill(0); // fill the next bit of text with black
     textFont(f[2]); // choose which font to use from the array defined in setup, the index number will be 0-9 if you haven't changed the array above
     textSize(height/40); // the height of the font will be 1/40th the height of the page
     text(fileTitle, width/2, height/10); // render the file name to the page so it's part of the colophon
@@ -154,26 +159,9 @@ void draw(){
       textFont(f[2]); // choose the font for this colophon line, a number between 0-9 if you haven't made any changes
       textSize(height/40); // the heigth of the font for this line will be 1/40th the height of the page
       text(colophonMatter[i], width/2, height/8+(i*height/8)); // render the line of text from the colophon array calculating the vertical position as a fraction of the height and the index number of the loop, the default is to allow a 1/8th of the page height margin above and below 
-    }
+    } // end loop through colophonMatter array
+    
     println("done");// provide feedback to the console that the job is done
-    exit(); // end execution of the sketch because we have finished rendering the colophon which is the last page of the book. this may also be necessary to close the PDF file
-  }
-}
-//==============================
-// create a function called f that should render a snowflake with a turtle
-void f (float length, int depth ){  // found on http://www.algorithm.co.il/blogs/computer-science/fractals-in-10-minutes-no-6-turtle-snowflake/
-        //def f(length, depth):
-   if (depth == 0){
-     // move turtle forward  forward(length);
-   }
-   else{
-     f(length/3, depth-1);
-     // turn turtle  right(60);
-     f(length/3, depth-1);
-     // turn turtle   left(120);
-     f(length/3, depth-1);
-     // turn turtle   right(60);
-     f(length/3, depth-1);
-   }
- 
-}
+    exit(); // end execution of the sketch because we have finished rendering the colophon which is the last page of the book. this is also be necessary to close the PDF file
+  } // end section that renders the colophon
+} // end draw loop
