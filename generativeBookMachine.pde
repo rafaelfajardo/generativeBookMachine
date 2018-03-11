@@ -78,14 +78,15 @@ void setup(){
 } // finish setup()
  
  
-//==========
-//==========
+//================================
+//================================
 void draw(){
   background(255); // (re)paint the white background
   
   PGraphicsPDF pdf = (PGraphicsPDF) g;  // Get the renderer. I am presuming that it should appear before the "pdf.nextPage();" command, and only once in the draw() loop.
   
-  //========== Render anteMatter page(s) (title page, front matter in traditions of the book)
+  //==============================
+  // Render anteMatter page(s) (title page, front matter in traditions of the book)
   if (frameCount == 1){ // if this is the first frame of the "draw" loop then render the front matter
     println("front matter"); // provide feedback through the console that the front matter is being rendered
     for ( int i = 0; i < anteMatter.length; i++){ // loop through the front matter array
@@ -97,11 +98,13 @@ void draw(){
     pdf.nextPage(); //when we've completed the front matter the start making the next PDF page
   } // end of rendering first page
   
-  //========== Render bodyMatter pages (text block)
+  //==============================
+  // Render bodyMatter pages (text block)
   if (frameCount > 1 && frameCount < pageCount){ // if the frame is between 1 and the total number of pages then execute this section that renders the body of the book
     println("body page no. " + frameCount); //provide feedback through the console that page number XX is about to be rendered
 
-  //========== this section makes a code drawing on the page:  
+  //==============================
+  // this section makes a code drawing on the page:  
   //cycle through all the turtlesBox
   for (int i = 0; i < turtlesBox.length; i++){    
     //if x and y  of a turtle are within the canvas, or with the margins in 1/8th page increments
@@ -164,4 +167,5 @@ void draw(){
     println("done");// provide feedback to the console that the job is done
     exit(); // end execution of the sketch because we have finished rendering the colophon which is the last page of the book. this is also be necessary to close the PDF file
   } // end section that renders the colophon
+  
 } // end draw loop
