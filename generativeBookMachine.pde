@@ -31,62 +31,72 @@ void setup(){
    size (396, 612, PDF, fileTitle); // create an arbitrary sized square composition, use PDF renderer and save to a file titled book+datestamp+timestamp
    //72 dpi is the default
    // 396 x 612 = 5.5" x 8.5"
+   
    // can I manipulate the pixel density?
    //pixelDensity(displayDensity()); // give access to full density available via the graphics card, important for retina-display Apple devices. may not be crucial on other technologies. seems to be breaking the generation of the PDF
+   // short answer is "no" I cannot manipulate the pixel density without messing up the output page size. 
+   
    // load the string arrays
    anteMatter = loadStrings("ante.txt");// load the contents of the file ante.txt into an array
    bodyMatter = loadStrings("body.txt"); // load the contents of the file body.txt into an array
    colophonMatter = loadStrings("colophon.txt"); // load the contents of the file colophon.txt into an array
-   // load the f[] array with font weight from lightest to heaviest
-   f[0] = createFont("WorkSansHairline-Regular.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[1] = createFont("WorkSans-Thin.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[2] = createFont("WorkSans-ExtraLight.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[4] = createFont("WorkSans-Light.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[4] = createFont("WorkSans-Regular.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[5] = createFont("WorkSans-Medium.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[6] = createFont("WorkSans-SemiBold.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[7] = createFont("WorkSans-Bold.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[8] = createFont("WorkSans-ExtraBold.ttf", height/10, true); // load a font into a place in the font array f[]
-   f[9] = createFont("WorkSans-Black.ttf", height/10, true); // load a font into a place in the font array f[]
+   
+   // assign the f[] array with font weight from lightest to heaviest.  use "createFont" to ensure vector output, not "loadFont"
+   f[0] = createFont("WorkSansHairline-Regular.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[1] = createFont("WorkSans-Thin.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[2] = createFont("WorkSans-ExtraLight.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[4] = createFont("WorkSans-Light.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[4] = createFont("WorkSans-Regular.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[5] = createFont("WorkSans-Medium.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[6] = createFont("WorkSans-SemiBold.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[7] = createFont("WorkSans-Bold.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[8] = createFont("WorkSans-ExtraBold.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[9] = createFont("WorkSans-Black.ttf", height/10, true); // assign a font into a place in the font array f[]
+   
+   // choose a default horizontal alignment for the text or text box
    textAlign(CENTER); // choose to center the line(s) of text as a default
    background (255); // choose to work with a white background
 
-  // create a set of turtlesBox
+  // create a set of turtlesBox with the Turtle class to use for the code drawing on each text page
   for (int i = 0; i < turtlesBox.length; i++){ //loop to cycle through and initialize/construct the turtles
-    float newX = random(width/8+10, width*7/8-10 ); // locate the first x value within the margins
-    float newY = random(height/8+10, height+7/8-10 ); // locat the first y value within the margins
-    int   newW = 1;
+    float newX = random(width/8+10, width*7/8-10 ); // locate the first x value within the margins 1/8 of page size
+    float newY = random(height/8+10, height+7/8-10 ); // locate the first y value within the margins 1/8 of page size
+    int   newW = 1; // choose line width of pen for turtle to leave its mark
     color newC = paletteBox.GetColor(); // get a color from the Palette
     //color newC = color(random(255),random(255)); // random grey and alpha // if one wants a random color
-    float newA = random (0,45); // create an angle between 0 and 45°
-    turtlesBox [i] = new Turtle ( newX,
-                               newY,
-                               newW,
-                               newC,
-                               newA,
-                               true);
+    float newA = random (0,45); // create an initial angle between 0° and 45° for the turtle to face
+    // assign the values created above to the new turtle in the array
+    turtlesBox [i] = new Turtle ( newX, // assign the initial X value (horizontal position)
+                                  newY, // assign the initial Y value (vertical position)
+                                  newW, // assign the initial W value (width)
+                                  newC, // assign the initial C value (color)
+                                  newA, // assign the initial A value (angle)
+                                  true);// assign the initial penDown vaule to true
   } // finish setting up turtlesBox
    
       println("setup complete"); // give feedback through the console that setup has completed
 } // finish setup()
  
+ 
+//==========
 //==========
 void draw(){
   background(255); // (re)paint the white background
   
   PGraphicsPDF pdf = (PGraphicsPDF) g;  // Get the renderer. I am presuming that it should appear before the "pdf.nextPage();" command, and only once in the draw() loop.
   
-  //========== Render anteMatter pages (title page)
+  //========== Render anteMatter page(s) (title page, front matter in traditions of the book)
   if (frameCount == 1){ // if this is the first frame of the "draw" loop then render the front matter
     println("front matter"); // provide feedback through the console that the front matter is being rendered
     for ( int i = 0; i < anteMatter.length; i++){ // loop through the front matter array
       fill(0); // choose to fill the font with black, can use another color
       textFont(f[4]); // choose the font for use on the title page, the array index value should be 0-9 if you haven't made any changes to the font array above
-      textSize(height/(20*(i+1))); // the size of the font will change with each pass through the loop
+      textSize(height/(20*(i+1))); // the size of the font will change, get smaller, with each pass through the loop
       text(anteMatter[i], width/2, height/8+(i*height/8)); // render the text contained in the anteMatter array to the screen
-    }
+    } // end loop through the front matter array
     pdf.nextPage(); //when we've completed the front matter the start making the next PDF page
-  }
+  } // end of rendering first page
+  
   //========== Render bodyMatter pages (text block)
   if (frameCount > 1 && frameCount < pageCount){ // if the frame is between 1 and the total number of pages then execute this section that renders the body of the book
     println("body page no. " + frameCount); //provide feedback through the console that page number XX is about to be rendered
