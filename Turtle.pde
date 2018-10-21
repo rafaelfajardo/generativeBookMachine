@@ -34,6 +34,7 @@ class Turtle {
    boolean penDown ;
    
    
+   // default Constructor to initialize default state of Turtle and its component or member variables
    Turtle() {
      curX= 100 ;
      curY = 100 ;
@@ -44,6 +45,7 @@ class Turtle {
    }
    
    
+   // Constructor that acts as an API for Turtle class, surfacing the component variables for input from other parts of the sketch
    Turtle(float inX, float inY, int inWidth, color inColor, float inAngle, boolean inDown) {
      curX= inX ;
      curY = inY ;
