@@ -16,7 +16,8 @@
  *  can depend on Turtle class
  */
  
- //Maggie was here. 
+//ilona 
+//Maggie was here. 
 
 import processing.pdf.*; // enables the ability to render PDFs
 int pageCount = 64; // a constant, should be non-zero and divisible by 4
