@@ -15,7 +15,11 @@
  *  can depend on Spline class (to be built)
  *  can depend on Turtle class
  */
+
 //Ethan says hello
+//ilona 
+//Maggie was here. 
+
 import processing.pdf.*; // enables the ability to render PDFs
 int pageCount = 64; // a constant, should be non-zero and divisible by 4
 String[] anteMatter; // an array to hold front matter words, title page e.g.
