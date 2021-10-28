@@ -1,7 +1,7 @@
 set into type
-by YourName Here
+by Rafael Fajardo
 using Processing 3
-with the font you chose
+with Work Sans
 as a generative book
 this is a poemmachine
 for emergent digital practices

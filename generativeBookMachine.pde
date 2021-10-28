@@ -28,7 +28,7 @@ String[] bodyMatter; // an array to hold body matter words, text e.g.
 String[] colophonMatter; // an array to hold colophon words, credits and printing methods e.g.
 String myColor; // a string placeholder for a color value
 PFont [] f = new PFont [10]; // an array to hold 10 fonts
-String fileTitle = "testbook_"+year()+"-"+nf(month(),2)+"-"+nf(day(),2)+"-"+nf(hour(),2)+"-"+nf(minute(),2)+"-"+nf(second(),2)+".pdf"; //generates a file named "test book" with today's date in YYYY MM DD HH MM SS format in the filename
+String fileTitle = "RafaelsBOOK_"+year()+"-"+nf(month(),2)+"-"+nf(day(),2)+"-"+nf(hour(),2)+"-"+nf(minute(),2)+"-"+nf(second(),2)+".pdf"; //generates a file named "test book" with today's date in YYYY MM DD HH MM SS format in the filename
 Palette paletteBox = new Palette(); //palette for Box
 Turtle [] turtlesBox = new Turtle [128]; //number of turtles of type Box
 
@@ -119,8 +119,8 @@ void draw(){
       &&(turtlesBox [i].GetY() > height/8 - 2 )){
         //each turtle will make a circle, in turn
         for (int j = 0; j < 360; j++){  // loop to get the turtles to walk in a circle
-          turtlesBox [i].Move ( .1f ); // move forward a bit
-          turtlesBox [i].Turn ( 1 ); // turn a bit
+          turtlesBox [i].Move ( 10f ); // move forward a bit
+          turtlesBox [i].Turn ( 0 ); // turn a bit
         }
     }
     // if a turtle finds itself outside the canvas/margins, then bring them back in
