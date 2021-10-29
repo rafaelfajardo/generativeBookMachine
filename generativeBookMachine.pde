@@ -47,7 +47,8 @@ void setup(){
    colophonMatter = loadStrings("colophon.txt"); // load the contents of the file colophon.txt into an array
    
    // assign the f[] array with font weight from lightest to heaviest.  use "createFont" to ensure vector output, not "loadFont"
-   f[0] = createFont("WorkSansHairline-Regular.ttf", height/10, true); // assign a font into a place in the font array f[]
+//   f[0] = createFont("WorkSansHairline-Regular.ttf", height/10, true); // assign a font into a place in the font array f[]
+   f[0] = createFont("HennyPenny-Regular.ttf", height/10, true); // assign a font into a place in the font array f[]
    f[1] = createFont("WorkSans-Thin.ttf", height/10, true); // assign a font into a place in the font array f[]
    f[2] = createFont("WorkSans-ExtraLight.ttf", height/10, true); // assign a font into a place in the font array f[]
    f[4] = createFont("WorkSans-Light.ttf", height/10, true); // assign a font into a place in the font array f[]
@@ -96,7 +97,7 @@ void draw(){
     println("front matter"); // provide feedback through the console that the front matter is being rendered
     for ( int i = 0; i < anteMatter.length; i++){ // loop through the front matter array
       fill(0); // choose to fill the font with black, can use another color
-      textFont(f[4]); // choose the font for use on the title page, the array index value should be 0-9 if you haven't made any changes to the font array above
+      textFont(f[0]); // choose the font for use on the title page, the array index value should be 0-9 if you haven't made any changes to the font array above
       textSize(height/(20*(i+1))); // the size of the font will change, get smaller, with each pass through the loop
       text(anteMatter[i], width/2, height/8+(i*height/8)); // render the text contained in the anteMatter array to the screen
     } // end loop through the front matter array
