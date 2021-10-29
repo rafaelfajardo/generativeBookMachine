@@ -1,6 +1,6 @@
 class Palette {
   String inColor; 
-  int numColors = 24; // integer number of colors in this palette
+  int numColors = 6; // integer number of colors in this palette
   color [] col = new color [numColors]; // array to hold the colors in the palette
 
   /*
@@ -19,7 +19,7 @@ class Palette {
    */
 
 
-  // /* 
+ /* 
   // blues
   Palette() {
     // Kuler shades of (0, 76, 127)
@@ -53,7 +53,7 @@ class Palette {
     //
     col [23] = color (0, 76, 127);
   }
-  //*/ 
+*/ 
 
 
 
@@ -68,7 +68,7 @@ class Palette {
 
   /*
   // sepias & yellows, maybe
-  // change numColors for this palett to 20
+  // change numColors for this palette to 20
   Palette(){
     col [0] = color (0,0,0,random(128,255));
     col [1] = color (255,255,255, random(128,255));
@@ -93,7 +93,7 @@ class Palette {
   }
   */
 
-  /* 
+//  /* 
   // yellows to brown
   // change numColors for this palette to 6
   Palette(){  
@@ -104,7 +104,7 @@ class Palette {
     col [4] = color (204,145,12,random(255));
     col [5] = color (255,255,255, random(255));
   }
-  */
+//  */
 
   /*
   // greens ? maybe cyans

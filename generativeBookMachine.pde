@@ -22,13 +22,13 @@
 //Maggie was here.
 
 import processing.pdf.*; // enables the ability to render PDFs
-int pageCount = 64; // a constant, should be non-zero and divisible by 4
+int pageCount = 12; // a constant, should be non-zero and divisible by 4
 String[] anteMatter; // an array to hold front matter words, title page e.g.
 String[] bodyMatter; // an array to hold body matter words, text e.g.
 String[] colophonMatter; // an array to hold colophon words, credits and printing methods e.g.
 String myColor; // a string placeholder for a color value
 PFont [] f = new PFont [10]; // an array to hold 10 fonts
-String fileTitle = "RafaelsBOOK_"+year()+"-"+nf(month(),2)+"-"+nf(day(),2)+"-"+nf(hour(),2)+"-"+nf(minute(),2)+"-"+nf(second(),2)+".pdf"; //generates a file named "test book" with today's date in YYYY MM DD HH MM SS format in the filename
+String fileTitle = "output/RafaelsBOOK_"+year()+"-"+nf(month(),2)+"-"+nf(day(),2)+"-"+nf(hour(),2)+"-"+nf(minute(),2)+"-"+nf(second(),2)+".pdf"; //generates a file named "test book" with today's date in YYYY MM DD HH MM SS format in the filename
 Palette paletteBox = new Palette(); //palette for Box
 Turtle [] turtlesBox = new Turtle [128]; //number of turtles of type Box
 
@@ -120,8 +120,8 @@ void draw(){
       &&(turtlesBox [i].GetY() > height/8 - 2 )){
         //each turtle will make a circle, in turn
         for (int j = 0; j < 360; j++){  // loop to get the turtles to walk in a circle
-          turtlesBox [i].Move ( 10f ); // move forward a bit
-          turtlesBox [i].Turn ( 0 ); // turn a bit
+          turtlesBox [i].Move ( 1f ); // move forward a bit
+          turtlesBox [i].Turn ( random(-1,1) ); // turn a bit
         }
     }
     // if a turtle finds itself outside the canvas/margins, then bring them back in
@@ -141,14 +141,14 @@ void draw(){
     
     //==============================
     //This part prepares to render text on top of the code drawing
-    fill(128); // fill this font with grey so that it's visible on top of the code drawing
-    textFont(f[8]); // choose the font from the array, array index should be 0-9 if you haven't changed the font array above
+    fill(255,158,23); // fill this font with grey so that it's visible on top of the code drawing
+    textFont(f[0]); // choose the font from the array, array index should be 0-9 if you haven't changed the font array above
     textSize(height/10); // the size of the font will be 1/10th the height of the page
     text(bodyMatter[int(random(bodyMatter.length))],width/2,height/2); // render a random line from the body text array to the center of the page  
     
     //create a page number at the bottom of the page in the margin
     fill(0); // fill the next bit of text with black, it will be in the margin so it will be against a white background
-    textFont(f[1]); // choose a font from the array, array index should be 0-9 if you haven't changed the font array above
+    textFont(f[4]); // choose a font from the array, array index should be 0-9 if you haven't changed the font array above
     textSize(height/50); // choose size for this bit of text to be 1/50th of the height of the page, this will be small, that's okay
     text(frameCount, width/2, height*9/10); // render this bit of text to the lower margin, it is the page number, hence frameCount
     
@@ -162,12 +162,12 @@ void draw(){
     fill(0); // fill the next bit of text with black
     textFont(f[2]); // choose which font to use from the array defined in setup, the index number will be 0-9 if you haven't changed the array above
     textSize(height/40); // the height of the font will be 1/40th the height of the page
-    text(fileTitle, width/2, height/10); // render the file name to the page so it's part of the colophon
+    text(fileTitle, width/2, 2*height/12); // render the file name to the page so it's part of the colophon
     for ( int i = 0; i < colophonMatter.length; i++){ // loop though all of the lines in the colophon array
       fill(0);
       textFont(f[2]); // choose the font for this colophon line, a number between 0-9 if you haven't made any changes
       textSize(height/40); // the heigth of the font for this line will be 1/40th the height of the page
-      text(colophonMatter[i], width/2, height/8+(i*height/8)); // render the line of text from the colophon array calculating the vertical position as a fraction of the height and the index number of the loop, the default is to allow a 1/8th of the page height margin above and below 
+      text(colophonMatter[i], width/2, (3*height/12)+(i*height/12)); // render the line of text from the colophon array calculating the vertical position as a fraction of the height and the index number of the loop, the default is to allow a 1/8th of the page height margin above and below 
     } // end loop through colophonMatter array
     
     println("done");// provide feedback to the console that the job is done
