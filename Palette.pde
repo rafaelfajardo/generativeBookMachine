@@ -21,6 +21,7 @@ class Palette {
 
  /* 
   // blues
+  // change numColors to 24 if you use this palette
   Palette() {
     // Kuler shades of (0, 76, 127)
     col [0] = color (0, 76, 127);
