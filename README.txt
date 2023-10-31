@@ -1,6 +1,7 @@
 generativeBookMachine
 
-a sketch in Processing 3.3.6 that generates paginated books from .txt files.
+a sketch in originated in Processing 3.3.6 that generates paginated books from .txt files.
+successfully tested in Processing 4.0.1. (thank you Park Depper)
 
 this first commit is a working generative book sketch with the following dependencies: 
 1. the existence of a data folder (or sub-directory) containing
